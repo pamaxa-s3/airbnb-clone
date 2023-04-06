@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
+import { log } from 'console';
 
 interface ModalProps {
 	isOpen?: boolean;
@@ -69,7 +70,12 @@ const Modal: React.FC<ModalProps> = ({
 
 	return (
 		<>
-			<div className='
+			<div
+				// onClick={handleClose}
+				onClick={e => (e.target as Element).classList.contains('out-off-modal')
+					? handleClose()
+					: null}
+				className='
 				flex 
 				justify-center 
 				items-center 
@@ -81,6 +87,7 @@ const Modal: React.FC<ModalProps> = ({
 				outline-none 
 				focus:outline-none 
 				bg-neutral-800/70
+				out-off-modal
 			'>
 				<div className='
 					relative 
