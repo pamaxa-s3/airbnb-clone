@@ -7,7 +7,7 @@ export async function getSession() {
 	return await getServerSession(authOptions);
 }
 
-export default async function gerCurrentUser() {
+export default async function getCurrentUser() {
 	try {
 		const session = await getSession();
 
@@ -21,7 +21,12 @@ export default async function gerCurrentUser() {
 
 		if (!currentUser) return null;
 
-		return currentUser;
+		return {
+			...currentUser,
+			createdAt: currentUser.createdAt.toISOString(),
+			updadetedAt: currentUser.updatedAt.toISOString(),
+			emailVerified: currentUser.emailVerified?.toISOString() || null
+		};
 
 	} catch (error: any) {
 		return null;
